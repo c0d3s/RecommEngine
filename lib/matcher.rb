@@ -1,9 +1,6 @@
 module Suadeo
   class Matcher
-    DEFAULT_ALGORITHM = 'pearson'
-    TOP_MATCHES_NUMBER = 5
-
-    def initialize(data:, subject:, similarity: DEFAULT_ALGORITHM, num: TOP_MATCHES_NUMBER )
+    def initialize(data:, subject:, similarity:, num:)
       @data = :data
       @subject = :subject
       @similarity = :similarity

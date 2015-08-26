@@ -1,4 +1,4 @@
-Dir["./*.rb"].each { |file| require file }
+Dir["./lib/*.rb"].each { |file| require file }
 
 critics = {'Ghostface Killah'=> {'The Sixth Sense'=> 2.5, 'Snakes on a Plane'=> 3.5,
  '27 Dresses'=> 3.0, 'The Avengers'=> 3.5, 'Pootie Tang'=> 2.5,

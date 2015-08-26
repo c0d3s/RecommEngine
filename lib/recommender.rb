@@ -1,6 +1,6 @@
 module Suadeo
   class Recommender
-    def initialize(data:, subject:, similarity: 'Pearson')
+    def initialize(data:, subject:, similarity:)
       @data = data
       @subject = subject
       @similarity = similarity
