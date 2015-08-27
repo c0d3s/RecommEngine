@@ -1,9 +1,11 @@
 module Suadeo
   class Calculator
-    def initialize(data:, p1:, p2:)
+    attr_reader :data, :subject, :comparate
+
+    def initialize(data:, subject:, comparate:)
       @data = data
-      @p1 = p1
-      @p2 = p2
+      @subject = subject
+      @comparate = comparate
     end
   end
 end

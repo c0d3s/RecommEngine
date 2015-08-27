@@ -2,7 +2,7 @@ module Suadeo
   class PearsonCalculator < Calculator
     attr_accessor :sum1, :sum2, :sq_sum1, :sq_sum2, :product_sum
 
-    def initialize(data:, p1:, p2:)
+    def initialize(data:, subject:, comparate:)
       super
       @sum1 = @sum2 = @sq_sum1 = @sq_sum2 = @product_sum = 0
     end
@@ -16,7 +16,7 @@ module Suadeo
     private
 
     def similar_items
-      @similar_items ||= @data[@p1].map{ |k, v| k if @data[@p2].keys.include?(k) }.compact
+      @similar_items ||= @data[@subject].map{ |k, v| k if @data[@comparate].keys.include?(k) }.compact
     end
 
     def number_of_hits
@@ -28,13 +28,13 @@ module Suadeo
     end
 
     def sum_simalarities(item)
-      p1_val = @data[@p1][item]
-      p2_val = @data[@p2][item]
-      @sum1 += p1_val
-      @sum2 += p2_val
-      @sq_sum1 += p1_val**2
-      @sq_sum2 += p2_val**2
-      @product_sum += p1_val * p2_val
+      subject_val = @data[@subject][item]
+      comparate_val = @data[@comparate][item]
+      @sum1 += subject_val
+      @sum2 += comparate_val
+      @sq_sum1 += subject_val**2
+      @sq_sum2 += comparate_val**2
+      @product_sum += subject_val * comparate_val
     end
 
     def perform_equation

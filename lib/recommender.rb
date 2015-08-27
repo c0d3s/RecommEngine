@@ -33,7 +33,7 @@ module Suadeo
 
     def score(comperate)
       return @similarity_scores[comperate] if @similarity_scores && @similarity_scores[comperate]
-      @similarity_scores[comperate] = similarity_calculator.new(data: @data, p1: @subject, p2: comperate).calc
+      @similarity_scores[comperate] = similarity_calculator.new(data: @data, subject: @subject, comparate: comperate).calc
     end
 
     def similarity_calculator
