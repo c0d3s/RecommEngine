@@ -1,8 +1,8 @@
 module Suadeo
   class EuclideanCalculator < Calculator
-    attr_reader :data, :p1, :p2
+    attr_reader :data, :subject, :comparate
 
-    def initialize(data:, p1:, p2:)
+    def initialize(data:, subject:, comparate:)
       super
     end
 
@@ -13,7 +13,7 @@ module Suadeo
     private
 
     def sum_simalarities
-      @data[@p1].map{ |k, v| ((v - data[p2][k])**2) if data[p2][k] }.compact.inject(:+)
+      @data[@subject].map{ |k, v| ((v - data[comparate][k])**2) if data[comparate][k] }.compact.inject(:+)
     end
   end
 end

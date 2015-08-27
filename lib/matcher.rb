@@ -30,7 +30,7 @@ module Suadeo
       scores = {}
       data.each_key do |k|
         next if subject == k
-        scores[k] = similarity_calculator.new(data: @data, p1: @subject, p2: k).calc
+        scores[k] = similarity_calculator.new(data: @data, subject: @subject, comparate: k).calc
       end
       scores
     end
