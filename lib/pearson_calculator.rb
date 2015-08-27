@@ -1,4 +1,4 @@
-module Suadeo
+module RecommEngine
   class PearsonCalculator < Calculator
     attr_accessor :sum1, :sum2, :sq_sum1, :sq_sum2, :product_sum
 

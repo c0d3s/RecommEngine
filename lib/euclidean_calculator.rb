@@ -1,4 +1,4 @@
-module Suadeo
+module RecommEngine
   class EuclideanCalculator < Calculator
     attr_reader :data, :subject, :comparate
 

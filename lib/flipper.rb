@@ -1,4 +1,4 @@
-module Suadeo
+module RecommEngine
   class Flipper
     def initialize(data)
       @data = data

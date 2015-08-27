@@ -1,6 +1,6 @@
 describe '.PearsonCalculator' do
   include_context "test data"
-  let(:pearson_calc) { Suadeo::PearsonCalculator.new(data: data, subject: 'ODB', comparate: 'Raekwon') }
+  let(:pearson_calc) { RecommEngine::PearsonCalculator.new(data: data, subject: 'ODB', comparate: 'Raekwon') }
 
   describe '#calc' do
     it 'calculates pearson similarity' do

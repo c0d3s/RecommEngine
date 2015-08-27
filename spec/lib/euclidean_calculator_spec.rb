@@ -1,6 +1,6 @@
 describe '.EuclideanCalculator' do
   include_context "test data"
-  let(:euclidean_calc) { Suadeo::EuclideanCalculator.new(data: data, subject: 'ODB', comparate: 'Raekwon') }
+  let(:euclidean_calc) { RecommEngine::EuclideanCalculator.new(data: data, subject: 'ODB', comparate: 'Raekwon') }
 
   describe '#calc' do
     it 'calculates euclidean similarity' do

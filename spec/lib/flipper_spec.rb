@@ -1,6 +1,6 @@
 describe '.recommender' do
   include_context "test data"
-  let(:flipper) { Suadeo::Flipper.new(data) }
+  let(:flipper) { RecommEngine::Flipper.new(data) }
 
   describe '#flip' do
     it 'flips products and users' do

@@ -1,10 +1,8 @@
-module Suadeo
+module RecommEngine
   class Recommender
     attr_reader :data, :subject, :similarity, :similarity_scores, :totals, :similarity_sums
 
-    DEFAULT_ALGORITHM = 'Pearson'
-
-    def initialize(data:, subject:, similarity: DEFAULT_ALGORITHM)
+    def initialize(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
       @data = data
       @subject = subject
       @similarity = similarity
@@ -37,7 +35,7 @@ module Suadeo
     end
 
     def similarity_calculator
-      Module.const_get("Suadeo::#{@similarity}Calculator")
+      Module.const_get("RecommEngine::#{@similarity}Calculator")
     end
 
     def non_positive_similarity?(comperate)
