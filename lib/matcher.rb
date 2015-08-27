@@ -1,11 +1,8 @@
-module Suadeo
+module RecommEngine
   class Matcher
     attr_reader :data, :subject, :similarity, :num
 
-    DEFUALT_ALGORITHM = 'Pearson'
-    DEFUALT_NUMBER = 3
-
-    def initialize(data:, subject:, similarity: DEFUALT_ALGORITHM, num: DEFUALT_NUMBER)
+    def initialize(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
       @data = data
       @subject = subject
       @similarity = similarity
@@ -36,7 +33,7 @@ module Suadeo
     end
 
     def similarity_calculator
-      Module.const_get("Suadeo::#{@similarity}Calculator")
+      Module.const_get("RecommEngine::#{@similarity}Calculator")
     end
 
     def upper_limit

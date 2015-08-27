@@ -1,8 +1,8 @@
 describe '.matcher' do
   include_context "test data"
-  let(:default_matcher) { Suadeo::Matcher.new(data: data, subject: 'ODB') }
-  let(:euclidean_matcher) { Suadeo::Matcher.new(data: data, subject: 'ODB', similarity: 'Euclidean') }
-  let(:default_2_matcher) { Suadeo::Matcher.new(data: data, subject: 'ODB', num: 2) }
+  let(:default_matcher) { RecommEngine::Matcher.new(data: data, subject: 'ODB') }
+  let(:euclidean_matcher) { RecommEngine::Matcher.new(data: data, subject: 'ODB', similarity: 'Euclidean') }
+  let(:default_2_matcher) { RecommEngine::Matcher.new(data: data, subject: 'ODB', num: 2) }
 
   describe '#initialize' do
     it 'defaults to Pearson similarity algorithm if none is specified' do
@@ -17,7 +17,7 @@ describe '.matcher' do
   context 'when default calculator' do
     describe '#bottom_matches' do
       it 'utilizes Pearson algorithm' do
-        expect(default_matcher.send('similarity_calculator')).to eq(Module.const_get('Suadeo::PearsonCalculator'))
+        expect(default_matcher.send('similarity_calculator')).to eq(Module.const_get('RecommEngine::PearsonCalculator'))
       end
 
       it 'returns bottom most matches' do

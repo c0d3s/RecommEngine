@@ -1,7 +1,7 @@
 describe '.recommender' do
   include_context "test data"
-  let(:default_recommender) { Suadeo::Recommender.new(data: data, subject: 'Raekwon') }
-  let(:euclidean_recommender) { Suadeo::Recommender.new(data: data, subject: 'Raekwon', similarity: 'Euclidean') }
+  let(:default_recommender) { RecommEngine::Recommender.new(data: data, subject: 'Raekwon') }
+  let(:euclidean_recommender) { RecommEngine::Recommender.new(data: data, subject: 'Raekwon', similarity: 'Euclidean') }
 
   describe '#initialize' do
     it 'defaults to Pearson similarity algorithm if none is specified' do
@@ -12,7 +12,7 @@ describe '.recommender' do
   context 'when default calculator' do
     describe '#recs' do
       it 'utilizes Pearson algorithm' do
-        expect(default_recommender.send('similarity_calculator')).to eq(Module.const_get('Suadeo::PearsonCalculator'))
+        expect(default_recommender.send('similarity_calculator')).to eq(Module.const_get('RecommEngine::PearsonCalculator'))
       end
 
       it 'returns ranked recommendations' do

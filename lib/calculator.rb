@@ -1,4 +1,4 @@
-module Suadeo
+module RecommEngine
   class Calculator
     attr_reader :data, :subject, :comparate
 
