@@ -13,7 +13,7 @@ module RecommEngine
     private
 
     def sum_simalarities
-      @data[@subject].map{ |k, v| ((v - data[comparate][k])**2) if data[comparate][k] }.compact.inject(:+)
+      @data[@subject].map{ |product, score| ((score - data[comparate][product])**2) if data[comparate][product] }.compact.inject(:+)
     end
   end
 end
