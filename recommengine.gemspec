@@ -2,8 +2,8 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name          = 'recommengine'
-  s.version       = '0.1.1'
-  s.date          = '2015-08-27'
+  s.version       = '0.1.2'
+  s.date          = '2015-09-12'
   s.summary       = "A flexible recommendation engine."
   s.description   = "A flexible recommendation engine supporting multiple similarity algorithms for use in ecommerce sites, marketplaces, social sharing apps, and more."
   s.authors       = ["Cody Knauer"]
