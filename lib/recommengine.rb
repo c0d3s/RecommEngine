@@ -1,15 +1,5 @@
-# Dir['recommengine/*.rb'].each { |f| require f.gsub('.rb', ''); puts f }
-
-# require 'calculator'
-# require 'euclidean_calculator'
-# require 'flipper'
-# require 'pearson_calculator'
-# require 'matcher'
-# require 'recommender'
-
 files = %w[calculator euclidean_calculator flipper matcher pearson_calculator recommender]
-files.each { |f| require f}
-
+files.each { |f| require "recommengine/#{f}" }
 
 module RecommEngine
   DEFAULT_ALGORITHM = 'Pearson'
