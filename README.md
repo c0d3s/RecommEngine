@@ -67,7 +67,7 @@ Only products the subject has not rated will be returned.  The second element in
 Alternatively, we could specify the use of the Euclidean algorithm as follows.
 
 ```ruby
-RecommEngine(data: books, subject: :alice, similarity: 'Euclidean')
+RecommEngine.recs(data: books, subject: :alice, similarity: 'Euclidean')
 ```
 
 Which returns a similar, though subtly different set of results:
