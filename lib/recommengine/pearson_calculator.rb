@@ -1,10 +1,9 @@
 module RecommEngine
   class PearsonCalculator < Calculator
-    attr_accessor :sum1, :sum2, :sq_sum1, :sq_sum2, :product_sum
-
+    attr_accessor :sum_of_subject_ratings, :sum_of_comparate_ratings, :sum_of_sq_subject_ratings, :sum_of_sq_comparate_ratings, :sum_of_ratings_product
     def initialize(data:, subject:, comparate:)
       super
-      @sum1 = @sum2 = @sq_sum1 = @sq_sum2 = @product_sum = 0
+      @sum_of_subject_ratings = @sum_of_comparate_ratings = @sum_of_sq_subject_ratings = @sum_of_sq_comparate_ratings = @sum_of_ratings_product = 0
     end
 
     def calc
@@ -30,11 +29,11 @@ module RecommEngine
     def sum_simalarities(item)
       subject_val = @data[@subject][item]
       comparate_val = @data[@comparate][item]
-      @sum1 += subject_val
-      @sum2 += comparate_val
-      @sq_sum1 += subject_val**2
-      @sq_sum2 += comparate_val**2
-      @product_sum += subject_val * comparate_val
+      @sum_of_subject_ratings += subject_val
+      @sum_of_comparate_ratings += comparate_val
+      @sum_of_sq_subject_ratings += subject_val**2.0
+      @sum_of_sq_comparate_ratings += comparate_val**2.0
+      @sum_of_ratings_product += subject_val * comparate_val
     end
 
     def perform_equation
@@ -42,11 +41,11 @@ module RecommEngine
     end
 
     def numerator
-      @product_sum - (@sum1 * @sum2/number_of_hits)
+      @sum_of_ratings_product - (@sum_of_subject_ratings * @sum_of_comparate_ratings/number_of_hits)
     end
 
     def denominator
-      @denominator ||= Math.sqrt((@sq_sum1 - (@sum1**2)/number_of_hits)*(@sq_sum2 - (@sum2**2)/number_of_hits))
+      @denominator ||= Math.sqrt((@sum_of_sq_subject_ratings - (@sum_of_subject_ratings**2.0)/number_of_hits)*(@sum_of_sq_comparate_ratings - (@sum_of_comparate_ratings**2.0)/number_of_hits))
     end
   end
 end
