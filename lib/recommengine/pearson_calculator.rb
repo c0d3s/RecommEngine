@@ -1,13 +1,14 @@
 module RecommEngine
   class PearsonCalculator < Calculator
     attr_accessor :sum_of_subject_ratings, :sum_of_comparate_ratings, :sum_of_sq_subject_ratings, :sum_of_sq_comparate_ratings, :sum_of_ratings_product
+
     def initialize(data:, subject:, comparate:)
       super
       @sum_of_subject_ratings = @sum_of_comparate_ratings = @sum_of_sq_subject_ratings = @sum_of_sq_comparate_ratings = @sum_of_ratings_product = 0
     end
 
     def calc
-      return 0 if similar_items.empty?
+      return 0 if number_of_hits < 2
       sum_all_similarities
       perform_equation
     end
