@@ -30,7 +30,7 @@ module RecommEngine
     end
 
     def score(comperate)
-      return @similarity_scores[comperate] if @similarity_scores && @similarity_scores[comperate]
+      return @similarity_scores[comperate] if @similarity_scores[comperate]
       @similarity_scores[comperate] = similarity_calculator.new(data: @data, subject: @subject, comparate: comperate).calc
     end
 
