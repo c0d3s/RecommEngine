@@ -5,7 +5,7 @@ describe '.recommender' do
 
   describe '#initialize' do
     it 'defaults to Pearson similarity algorithm if none is specified' do
-      expect(default_recommender.similarity).to eq('Pearson')
+      expect(default_recommender.similarity_algorithm).to eq('Pearson')
     end
   end
 
