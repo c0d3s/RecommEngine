@@ -19,7 +19,7 @@ module RecommEngine
       predicted_ratings.sort_by{ |k, v| v }.reverse
     end
 
-    def top_match
+    def top_rec
       calculate_weighted_totals
       predicted_ratings.max_by{ |k, v| v }
     end
