@@ -2,6 +2,8 @@ files = %w[calculator euclidean_calculator flipper matcher pearson_calculator re
 files.each { |f| require "recommengine/#{f}" }
 
 module RecommEngine
+  extend self
+
   DEFAULT_ALGORITHM = 'Pearson'
   DEFAULT_MATCHES_NUMBER = 3
 
@@ -11,17 +13,21 @@ module RecommEngine
 
   alias_method :recs, :recommendations
 
+  def top_reccommendation(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
+    RecommEngine::Recommender.new(data: data, subject: subject, similarity: similarity).top_rec
+  end
+
+  alias_method :top_rec, :top_reccommendation
+
   def top_matches(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
     RecommEngine::Matcher.new(data: data, subject: subject, similarity: similarity, num: num).top_matches
   end
 
-  def bottom_matches(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
+  def dissimilar_users(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
     RecommEngine::Matcher.new(data: data, subject: subject, similarity: similarity, num: num).bottom_matches
   end
 
   def flip(data)
     RecommEngine::Flipper.new(data).flip
   end
-
-  module_function :recommendations, :recs, :top_matches, :flip
 end
