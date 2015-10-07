@@ -1,5 +1,5 @@
 # RecommEngine
-A plug-and-play recommendation engine gem supporting multiple similarity algorithms.  Use to recommend products for people, or people for products.
+A plug-and-play recommendation engine gem supporting multiple similarity algorithms.  Use to recommend items for people, or people for items.
 
 ## Installation
 Simply `gem install recommengine` or if using bundler, add recommengine to your Gemfile thusly
@@ -8,7 +8,7 @@ require 'recommengine'
 ```
 
 ## Methodology
-RecommEngine uses a weighted scoring system in conjunction with a similarity algorithm (of either the Pearson or Euclidean variety) to suggest 'products' to users based on their prior behavior in accordance with the principle of collaborative filtering.  In order to utilize this gem, you must have users, products, and some kind of numerical scoring system that describes a user's interaction with a given product.
+RecommEngine uses a weighted scoring system in conjunction with a similarity algorithm (of either the Pearson or Euclidean variety) to suggest 'items' to users based on their prior behavior in accordance with the principle of collaborative filtering.  In order to utilize this gem, you must have users, items, and some kind of numerical scoring system that describes a user's interaction with a given item.
 Products need not be physical items, as this gem has applications outside the ecommerce realm. Products can be things like movies or web links as well.  Similarly, scores aren't limited to only to ratings -- they only need to be a numerical representation that describes a user's behavior.  For example:
 
 
@@ -26,11 +26,11 @@ The Euclidean distance algorithm is a simplistic similarity measure that determi
 
 ### Pearson Algorithm
 
-The Pearson similarity score adds a bit more complexity.  Feel free to read up on it on [wikipedia](https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient).  The Pearson method is the default similarity algorithm in RecommEngine, primarily because it compensates for grade inflation when determining similarity.
+The Pearson similarity score adds a bit more complexity.  Feel free to read up on it on [wikipedia](https://en.wikipedia.org/wiki/Pearson_item-moment_correlation_coefficient).  The Pearson method is the default similarity algorithm in RecommEngine, primarily because it compensates for grade inflation when determining similarity.
 
 ### How Recommendations Work
 
-When passing 'data' and 'subject' arguments to the recommendations method, RecommEngine will compare the similarity between all members of the data hash and the subject using the specified similarity algorithm, and determine a weighted predicted score for each product based upon each user's similarity to the subject.  Only 'products' that the subject has not yet rated will be returned.  The products are sorted by score in descending order.
+When passing 'data' and 'subject' arguments to the recommendations method, RecommEngine will compare the similarity between all members of the data hash and the subject using the specified similarity algorithm, and determine a weighted predicted score for each item based upon each user's similarity to the subject.  Only 'items' that the subject has not yet rated will be returned.  The items are sorted by score in descending order.
 
 ## Usage
 
@@ -62,7 +62,7 @@ RecommEngine.recs(data: books, subject: :alice)
  ["War of the Worlds", 3.5]]
 ```
 
-Only products the subject has not rated will be returned.  The second element in each array is the predicted score the subject will give to the product, based upon the weighted average that similar users to alice have rated the product.  Since no similarity algorithm was specified, the Pearson score is used by default.
+Only items the subject has not rated will be returned.  The second element in each array is the predicted score the subject will give to the item, based upon the weighted average that similar users to alice have rated the item.  Since no similarity algorithm was specified, the Pearson score is used by default.
 
 Alternatively, we could specify the use of the Euclidean algorithm as follows.
 
@@ -97,7 +97,7 @@ By default, the Pearson algorithm is used, and only 3 results are returned.  The
 
 ### Flipper
 
-RecommEngine also provides a handy means to 'flip' your data -- transposing products and users.  This can be handy when attempting direct marketing campaigns for instance.  Products are compared by similarity, and users are recommended for each products.  It can lead to some interesting results.  For example
+RecommEngine also provides a handy means to 'flip' your data -- transposing items and users.  This can be handy when attempting direct marketing campaigns for instance.  Products are compared by similarity, and users are recommended for each items.  It can lead to some interesting results.  For example
 
 ```ruby
 RecommEngine.recs(data: RecommEngine.flip(books), subject: 'Crime and Punishment')
