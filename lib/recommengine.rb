@@ -13,11 +13,11 @@ module RecommEngine
 
   alias_method :recs, :recommendations
 
-  def top_reccommendation(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
+  def top_recommendation(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
     RecommEngine::Recommender.new(data: data, subject: subject, similarity: similarity).top_rec
   end
 
-  alias_method :top_rec, :top_reccommendation
+  alias_method :top_rec, :top_recommendation
 
   def top_matches(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
     RecommEngine::Matcher.new(data: data, subject: subject, similarity: similarity, num: num).top_matches
