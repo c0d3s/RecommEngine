@@ -1,27 +1,27 @@
 module RecommEngine
   class Recommender
-    attr_reader :data, :subject, :similarity_algorithm, :user_similarity_scores, :sum_of_weighted_ratings_by_product, :sum_of_user_similarity_scores_by_product, :rankings
+    attr_reader :data, :subject, :similarity_algorithm, :user_similarity_scores, :sum_of_weighted_scores_by_item, :sum_of_user_similarity_scores_by_item, :rankings
 
     def initialize(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
       @data = data
       @subject = subject
       @similarity_algorithm = similarity
-      @ratings = {}
+      @scores = {}
       @user_similarity_scores = {}
-      @sum_of_weighted_ratings_by_product = {}
-      @sum_of_user_similarity_scores_by_product = {}
-      @sum_of_weighted_ratings_by_product.default = 0
-      @sum_of_user_similarity_scores_by_product.default = 0
+      @sum_of_weighted_scores_by_item = {}
+      @sum_of_user_similarity_scores_by_item = {}
+      @sum_of_weighted_scores_by_item.default = 0
+      @sum_of_user_similarity_scores_by_item.default = 0
     end
 
     def recs
       calculate_weighted_totals
-      predicted_ratings.sort_by{ |k, v| v }.reverse
+      predicted_scores.sort_by{ |k, v| v }.reverse
     end
 
     def top_rec
       calculate_weighted_totals
-      predicted_ratings.max_by{ |k, v| v }
+      predicted_scores.max_by{ |k, v| v }
     end
 
     private
@@ -52,27 +52,27 @@ module RecommEngine
       score(comperate) <= 0
     end
 
-    def rated_by_subject?(subject, product)
-      return unless @data[subject][product]
-      !@data[subject][product].zero? || @data[subject].include?(product)
+    def scored_by_subject?(item)
+      return unless @data[@subject][item]
+      !@data[@subject][item].zero? || @data[@subject].include?(item)
     end
 
-    def update_cumulative_totals(comperate, product)
-      @sum_of_weighted_ratings_by_product[product] += weighted_rating(comperate, product)
-      @sum_of_user_similarity_scores_by_product[product] += score(comperate)
+    def update_cumulative_totals(comperate, item)
+      @sum_of_weighted_scores_by_item[item] += weighted_score(comperate, item)
+      @sum_of_user_similarity_scores_by_item[item] += score(comperate)
     end
 
-    def weighted_rating(comperate, product)
-      @data[comperate][product] * score(comperate)
+    def weighted_score(comperate, item)
+      @data[comperate][item] * score(comperate)
     end
 
-    def average_weighted_rating(product, sum_of_ratings)
-      sum_of_ratings / @sum_of_user_similarity_scores_by_product[product]
+    def average_weighted_score(item, sum_of_scores)
+      sum_of_scores / @sum_of_user_similarity_scores_by_item[item]
     end
 
-    def predicted_ratings
-      @sum_of_weighted_ratings_by_product.each { |product, sum_of_ratings| @ratings[product] = average_weighted_rating(product, sum_of_ratings) }
-      @ratings
+    def predicted_scores
+      @sum_of_weighted_scores_by_item.each { |item, sum_of_scores| @scores[item] = average_weighted_score(item, sum_of_scores) }
+      @scores
     end
   end
 end
