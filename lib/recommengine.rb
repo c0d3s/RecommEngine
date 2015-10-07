@@ -1,5 +1,5 @@
-files = %w[calculator euclidean_calculator flipper matcher pearson_calculator recommender]
-files.each { |f| require "recommengine/#{f}" }
+files = %w[calculator euclidean_calculator flipper matcher pearson_calculator recommender test_data]
+files.each { |f| require "./lib/recommengine/#{f}" }
 
 module RecommEngine
   extend self
