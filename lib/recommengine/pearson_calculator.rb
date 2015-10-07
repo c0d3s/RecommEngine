@@ -46,7 +46,7 @@ module RecommEngine
     end
 
     def denominator
-      denominator ||= Math.sqrt((sum_of_sq_subject_scores - (sum_of_subject_scores**2.0)/number_of_hits)*(sum_of_sq_comparate_scores - (sum_of_comparate_scores**2.0)/number_of_hits))
+      @_denominator ||= Math.sqrt((sum_of_sq_subject_scores - (sum_of_subject_scores**2.0)/number_of_hits)*(sum_of_sq_comparate_scores - (sum_of_comparate_scores**2.0)/number_of_hits))
     end
   end
 end
