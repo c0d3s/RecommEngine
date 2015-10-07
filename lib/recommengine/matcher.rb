@@ -20,14 +20,13 @@ module RecommEngine
     private
 
     def all_matches
-      scores.sort_by{|k, v| v}
+      similarity_scores.sort_by{|k, v| v}
     end
 
-    def scores
+    def similarity_scores
       scores = {}
-      data.each_key do |k|
-        next if subject == k
-        scores[k] = similarity_calculator.new(data: data, subject: subject, comparate: k).calc
+      comparates.each do |comparate|
+        scores[comparate] = similarity_calculator.new(data: data, subject: subject, comparate: comparate).calc
       end
       scores
     end
@@ -38,6 +37,10 @@ module RecommEngine
 
     def upper_limit
       num - 1
+    end
+
+    def comparates
+      data.dup.delete_if{ |k,v| k == subject }.keys
     end
   end
 end
