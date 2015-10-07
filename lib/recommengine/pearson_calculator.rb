@@ -2,7 +2,7 @@ module RecommEngine
   class PearsonCalculator < Calculator
     attr_accessor :sum_of_subject_ratings, :sum_of_comparate_ratings, :sum_of_sq_subject_ratings, :sum_of_sq_comparate_ratings, :sum_of_ratings_product
 
-    def initialize(data:, subject:, comparate:)
+    def initialize(*args)
       super
       @sum_of_subject_ratings = @sum_of_comparate_ratings = @sum_of_sq_subject_ratings = @sum_of_sq_comparate_ratings = @sum_of_ratings_product = 0
     end

@@ -1,11 +1,5 @@
 module RecommEngine
   class EuclideanCalculator < Calculator
-    attr_reader :data, :subject, :comparate
-
-    def initialize(data:, subject:, comparate:)
-      super
-    end
-
     def calc
       1.0 / (Math.sqrt(1.0 + sum_simalarities))
     end
