@@ -1,5 +1,7 @@
 module RecommEngine
   class Flipper
+    attr_reader :data
+
     def initialize(data)
       @data = data
     end
@@ -7,10 +9,10 @@ module RecommEngine
     def flip
       result = {}
       result.default = {}
-      @data.each_key do |k|
-        @data[k].each_key do |kk|
-          result[kk] = {} if result[kk].empty?
-          result[kk][k] = @data[k][kk]
+      data.each_key do |user|
+        data[user].each_key do |item|
+          result[item] = {} if result[item].empty?
+          result[item][user] = data[user][item]
         end
       end
       result
