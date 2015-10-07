@@ -19,7 +19,7 @@ module RecommEngine
 
   alias_method :top_rec, :top_recommendation
 
-  def top_matches(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
+  def similar_users(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
     RecommEngine::Matcher.new(data: data, subject: subject, similarity: similarity, num: num).top_matches
   end
 
