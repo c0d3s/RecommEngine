@@ -7,7 +7,15 @@ module RecommEngine
     private
 
     def sum_simalarities
-      @data[@subject].map{ |product, score| ((score - data[comparate][product])**2) if data[comparate][product] }.compact.inject(:+)
+      data[subject].map{ |item, subject_score| square_of_distance(item, subject_score) if comparate_score(item) }.compact.inject(:+)
+    end
+
+    def comparate_score(item)
+      data[comparate][item]
+    end
+
+    def square_of_distance(item, subject_score)
+      (subject_score - comparate_score(item))**2
     end
   end
 end
