@@ -27,13 +27,13 @@ module RecommEngine
       scores = {}
       data.each_key do |k|
         next if subject == k
-        scores[k] = similarity_calculator.new(data: @data, subject: @subject, comparate: k).calc
+        scores[k] = similarity_calculator.new(data: data, subject: subject, comparate: k).calc
       end
       scores
     end
 
     def similarity_calculator
-      Module.const_get("RecommEngine::#{@similarity}Calculator")
+      Module.const_get("RecommEngine::#{similarity}Calculator")
     end
 
     def upper_limit
