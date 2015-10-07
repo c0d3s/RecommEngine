@@ -9,6 +9,7 @@ require 'recommengine'
 
 ## Methodology
 RecommEngine uses a weighted scoring system in conjunction with a similarity algorithm (of either the Pearson or Euclidean variety) to suggest items to users based on their prior behavior in accordance with the principle of collaborative filtering.  In order to utilize this gem, you must have users, items, and some kind of numerical scoring system that describes a user's interaction with a given item.
+
 Items need not be physical products, as recommendation engines have applications outside the ecommerce/marketplace realm. Items can be things like movies or web links as well.  Similarly, scores aren't limited to only to ratings of physical items -- they only need to be a numerical representation that describes a user's behavior.  For example:
 
 
@@ -82,7 +83,7 @@ If you only want the top recommendation, simply:
 
 ```Ruby
 RecommEngine.top_rec(data: books, subject: :alice, similarity: 'Euclidean')
-
+```
 ### Similar Users
 
 RecommEngine includes a utility to find similar users to a subject.  This can be done by calling:
