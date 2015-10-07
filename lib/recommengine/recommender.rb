@@ -27,16 +27,9 @@ module RecommEngine
     private
 
     def calculate_weighted_totals
-      @data.each_key do |comperate|
-        next if is_subject?(comperate) || non_positive_similarity?(comperate)
-        @data[comperate].each_key do |product|
-          update_cumulative_totals(comperate, product) unless rated_by_subject?(@subject, product)
-        end
+      comperates.each do |comperate|
+        @data[comperate].each_key{ |item| update_cumulative_totals(comperate, item) unless scored_by_subject?(item) }
       end
-    end
-
-    def is_subject?(comperate)
-      comperate == @subject
     end
 
     def score(comperate)
@@ -74,5 +67,9 @@ module RecommEngine
       @sum_of_weighted_scores_by_item.each { |item, sum_of_scores| @scores[item] = average_weighted_score(item, sum_of_scores) }
       @scores
     end
+
+   def comperates
+     @data.dup.delete_if{ |k,v| k == @subject || non_positive_similarity?(k) }.keys
+   end
   end
 end
