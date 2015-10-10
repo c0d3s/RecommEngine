@@ -2,10 +2,11 @@ files = %w[calculator euclidean_calculator flipper matcher pearson_calculator re
 files.each { |f| require "./lib/recommengine/#{f}" }
 
 module RecommEngine
-  extend self
 
   DEFAULT_ALGORITHM = 'Pearson'
   DEFAULT_MATCHES_NUMBER = 3
+
+  module_function
 
   def recommendations(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
     RecommEngine::Recommender.new(data: data, subject: subject, similarity: similarity).recs
