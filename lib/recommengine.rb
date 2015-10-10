@@ -8,17 +8,13 @@ module RecommEngine
 
   module_function
 
-  def recommendations(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
+  def recs(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
     RecommEngine::Recommender.new(data: data, subject: subject, similarity: similarity).recs
   end
 
-  alias_method :recs, :recommendations
-
-  def top_recommendation(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
+  def top_rec(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM)
     RecommEngine::Recommender.new(data: data, subject: subject, similarity: similarity).top_rec
   end
-
-  alias_method :top_rec, :top_recommendation
 
   def similar_users(data:, subject:, similarity: RecommEngine::DEFAULT_ALGORITHM, num: RecommEngine::DEFAULT_MATCHES_NUMBER)
     RecommEngine::Matcher.new(data: data, subject: subject, similarity: similarity, num: num).top_matches
