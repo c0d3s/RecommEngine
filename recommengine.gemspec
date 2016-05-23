@@ -2,7 +2,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name          = 'recommengine'
-  s.version       = '0.1.3'
+  s.version       = '0.1.4'
   s.date          = '2015-09-12'
   s.summary       = "A flexible recommendation engine."
   s.description   = "A flexible recommendation engine supporting multiple similarity algorithms for use in ecommerce sites, marketplaces, social sharing apps, and more."
