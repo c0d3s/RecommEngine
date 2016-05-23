@@ -10,10 +10,10 @@ require 'recommengine'
 ## Methodology
 RecommEngine uses a weighted scoring system in conjunction with a similarity algorithm (of either the Pearson or Euclidean variety) to suggest items to users based on their prior behavior in accordance with the principle of collaborative filtering.  In order to utilize this gem, you must have users, items, and some kind of numerical scoring system that describes a user's interaction with a given item.
 
-Items need not be physical products, as recommendation engines have applications outside the ecommerce/marketplace realm. Items can be things like movies or web links as well.  Similarly, scores aren't limited to only to ratings of physical items -- they only need to be a numerical representation that describes a user's behavior.  For example:
+Items need not be physical products, as recommendation engines have applications outside the ecommerce/marketplace realm. Items can be things like movies or web links as well.  Similarly, scores aren't limited only to ratings of physical items -- they only need to be a numerical representation that describes a user's behavior.  For example:
 
 
-|(Score)| Physical Goods | Movies |  Web Habits  |
+| Score | Physical Goods | Movies |  Web Habits  |
 --------|:--------------:|:------:|-------------:|
 |   0   | No Interaction |   *    | Didn't Click |
 |   1   | Browsed        |   **   | Clicked      |
@@ -63,7 +63,7 @@ RecommEngine.recs(data: books, subject: :alice)
  ["War of the Worlds", 3.5]]
 ```
 
-Only items the subject has not rated will be returned.  The second element in each array is the predicted score the subject will give to the item, based upon the weighted average that similar users to alice have rated the item.  Since no similarity algorithm was specified, the Pearson score is used by default.
+Only items the subject has not rated will be returned (we won't recommend items with which the user is already familiar).  The second element in each array is the predicted score the subject will give to the item, based upon the weighted average that similar users to alice have rated the item.  Since no similarity algorithm was specified, the Pearson score is used by default.
 
 Alternatively, we could specify the use of the Euclidean algorithm as follows.
 
@@ -102,11 +102,13 @@ You'll notice a reasonably strong positive correlation with Don (meaning Don and
 
 By default, the Pearson algorithm is used, and only 3 results are returned.  These  parameters can be defined explicitly when calling the method, by passing for example `num: 5` and/or `similarity: 'Euclidean'`.
 
+Practically speaking, this can be used as a means to recommend users to one another in a social network.
+
 To get users with the lowest similarity score: `RecommEngine.dissimilar_users(data: ...`
 
 ### Flipper
 
-RecommEngine also provides a handy means to 'flip' your data -- transposing items and users.  This is most helpful when making generic item recommendations (for instance when a user is not logged in, or you do not have very much data for the logged-in user).  This can also be handy when pushing direct marketing campaigns for specific items.  Items are compared by similarity, and users are recommended for each items.  It can lead to some interesting results.  For example
+RecommEngine also provides a handy means to 'flip' your data -- transposing items and users.  This can be used for making generic item recommendations (for instance when a user is not logged in, or you do not have very much data for the logged-in user).  This can also be handy when pushing direct marketing campaigns for specific items.  Items are compared by similarity, and users are recommended for each items.  It can lead to some interesting results.  For example
 
 ```ruby
 RecommEngine.recs(data: RecommEngine.flip(books), subject: 'Crime and Punishment')
